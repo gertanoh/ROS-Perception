@@ -1,0 +1,53 @@
+<launch> 
+    
+    <arg name="machine" default="localhost" />
+    <arg name="user" default="" />
+    <arg name="load_params_from_file" default="true" />
+    
+    <arg name="ubd_queue_size" default="5" />
+    <arg name="gp_queue_size" value="5" />
+    
+    <arg name="camera_namespace" value="/head_camera" />
+    <arg name="rgb_image" value="/rgb/image_raw" />
+    <arg name="depth_image" value="/depth_registered/image_raw" />
+    <arg name="mono_image" value="/depth_registered/image_raw" />
+    <arg name="camera_info_rgb" value="/rgb/camera_info" />
+    <arg name="camera_info_depth" value="/depth_registered/camera_info" />
+    
+    <arg name="upper_body_detections" default="/upper_body_detector/detections" />
+    <arg name="upper_body_bb_centres" default="/upper_body_detector/bounding_box_centres" />
+    <arg name="upper_body_markers" default="/upper_body_detector/marker_array" />
+    <arg name="upper_body_image" default="/upper_body_detector/image" />
+    
+    <arg name="ground_plane" default="/ground_plane" />
+    
+    
+    <!-- Ground Plane -->
+    <include file="$(find ground_plane_estimation)/launch/ground_plane_estimated.launch">
+        <arg name="machine" value="$(arg machine)"/>
+        <arg name="user" value="$(arg user)"/>
+        <arg name="load_params_from_file" value="$(arg load_params_from_file)"/>
+        <arg name="queue_size" value="$(arg gp_queue_size)"/>
+        <arg name="camera_namespace" value="$(arg camera_namespace)"/>
+        <arg name="depth_image" value="$(arg depth_image)"/>
+        <arg name="camera_info_rgb" value="$(arg camera_info_rgb)"/>
+        <arg name="ground_plane" value="$(arg ground_plane)"/>
+    </include>
+    
+    <!-- Upper Body Detector -->
+    <include file="$(find upper_body_detector)/launch/upper_body_detector.launch">
+        <arg name="machine" value="$(arg machine)"/>
+        <arg name="user" value="$(arg user)"/>
+        <arg name="load_params_from_file" value="$(arg load_params_from_file)"/>
+        <arg name="queue_size" value="$(arg ubd_queue_size)"/>
+        <arg name="camera_namespace" value="$(arg camera_namespace)"/>
+        <arg name="rgb_image" value="$(arg rgb_image)"/>
+        <arg name="depth_image" value="$(arg depth_image)"/>
+        <arg name="camera_info_depth" value="$(arg camera_info_depth)"/>
+        <arg name="upper_body_detections" value="$(arg upper_body_detections)"/>
+        <arg name="upper_body_bb_centres" value="$(arg upper_body_bb_centres)"/>
+        <arg name="upper_body_markers" value="$(arg upper_body_markers)"/>
+        <arg name="upper_body_image" value="$(arg upper_body_image)"/>
+        <arg name="ground_plane" value="$(arg ground_plane)"/>
+    </include>
+</launch> 

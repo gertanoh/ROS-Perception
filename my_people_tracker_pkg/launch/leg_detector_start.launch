@@ -1,0 +1,17 @@
+<launch> 
+    <arg name="scan" default="/base_scan" />
+    <arg name="machine" default="localhost" />
+    <arg name="user" default="" />
+    <!-- Leg Detector -->
+    <node pkg="leg_detector" type="leg_detector" name="leg_detector" 
+        args="scan:=$(arg scan) $(find leg_detector)/config/trained_leg_detector.yaml"
+        respawn="true" output="screen">
+        <param name="fixed_frame" type="string" value="odom" />
+    </node>
+    
+    <!-- To PoseArray -->
+    <include file="$(find detector_msg_to_pose_array)/launch/to_pose_array.launch">
+        <arg name="machine" value="$(arg machine)"/>
+        <arg name="user" value="$(arg user)"/>
+    </include>
+</launch>   

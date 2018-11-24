@@ -1,0 +1,37 @@
+<launch>
+    <!-- Start navigation -->
+    <!-- rostopic info /people_tracker/marker_array -->
+    <include file="$(find my_people_tracker_pkg)/launch/people_tracker_custom.launch" >
+        <arg name="load_params_from_file" value="true" />
+        
+        <arg name="gp_queue_size" value="5" />
+        <arg name="vo_queue_size" value="5" />
+        <arg name="ubd_queue_size" value="5" />
+        <arg name="pt_queue_size" value="10" />
+        
+        <arg name="camera_namespace" value="/head_camera" />
+        <arg name="rgb_image" value="/rgb/image_raw" />
+        <arg name="depth_image" value="/depth_registered/image_raw" />
+        <arg name="mono_image" value="/depth_registered/image_raw" />
+        <arg name="camera_info_rgb" value="/rgb/camera_info" />
+        <arg name="camera_info_depth" value="/depth_registered/camera_info" />
+        
+        <arg name="ground_plane" value="/ground_plane" />
+        <arg name="upper_body_detections" value="/upper_body_detector/detections" />
+        <arg name="upper_body_bb_centres" value="/upper_body_detector/bounding_box_centres" />
+        <arg name="upper_body_markers" value="/upper_body_detector/marker_array" />
+        <arg name="upper_body_image" value="/upper_body_detector/image" />
+        <arg name="visual_odometry" value="/visual_odometry/motion_matrix" />
+        <arg name="people_array" value="/mdl_people_tracker/people_array" />
+        <arg name="people_image" value="/mdl_people_tracker/image" />
+        <arg name="people_markers" value="/mdl_people_tracker/marker_array" />
+        <arg name="people_poses" value="/mdl_people_tracker/pose_array" />
+        
+        <arg name="bayes_people_param_file" default="$(find my_people_tracker_pkg)/config/detectors.yaml" />
+        
+        <arg name="tf_target_frame" value="/base_link" />
+    
+        <arg name="machine" value="localhost" />
+        <arg name="user" value="" />
+    </include>
+</launch>

@@ -1,0 +1,13 @@
+<launch>
+    <arg name="camera_rgb_topic" default="/head_camera/rgb/image_raw" />
+    
+    <node name="find_object_2d_node" pkg="find_object_2d" type="find_object_2d" 
+        output="screen">
+        <remap from="image" to="$(arg camera_rgb_topic)"/>
+        <param name="gui" value="true" type="bool"/>
+        <param name="session_path" 
+            value="$(find my_object_recognition_pkg)/sessions/2d_finder.bin"
+            type="str" />
+        
+    </node>
+</launch>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <!-- Spawn CokeCan Model -->
+    <include file="$(find my_object_recognition_pkg)/launch/spawn_coke.launch" />
+    <!-- Make CokeCan Movable -->
+    <include file="$(find my_object_recognition_pkg)/launch/make_cokecan_movable.launch" />
+</launch>
